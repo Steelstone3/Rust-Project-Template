@@ -33,13 +33,13 @@ fn update_dive_profile_model(compartment: usize, mut dive_model: DiveModel, dive
 
 #[cfg(test)]
 mod controllers_dive_stage_should {
-    use crate::factories::zhl16_dive_model::create_zhl16_dive_model;
+    use crate::models::dive_model::DiveModel;
     use crate::tests::test_fixtures_dive_plan::{expected_dive_profile_model, test_fixture_cylinder, test_fixture_dive_step_default};
 
     #[test]
     fn run_dive_profile() {
         //Arrange
-        let zhl16 = create_zhl16_dive_model();
+        let zhl16 = DiveModel::create_zhl16_dive_model();
         let dive_step = test_fixture_dive_step_default();
         let gas_mixture = test_fixture_cylinder().gas_mixture;
         let expected_dive_profile = expected_dive_profile_model();

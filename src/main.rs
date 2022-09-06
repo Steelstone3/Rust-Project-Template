@@ -5,11 +5,10 @@ use crate::presenters::dive_plan::load_dive_plan::load_from_default_file;
 use crate::presenters::dive_plan::new_dive_plan::new_dive_plan;
 use crate::presenters::dive_plan::update_files::update_files;
 
-mod presenters;
-mod models;
-mod controllers;
 mod commands;
-mod factories;
+mod controllers;
+mod models;
+mod presenters;
 
 #[cfg(debug_assertions)]
 mod tests;
