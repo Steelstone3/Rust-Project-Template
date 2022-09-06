@@ -1,6 +1,5 @@
 use crate::{DiveProfile, DiveStep};
 use crate::controllers::dive_stage::run_dive_profile;
-use crate::controllers::gas_management::update_gas_management;
 use crate::models::cylinder::Cylinder;
 use crate::models::dive_model::DiveModel;
 use crate::presenters::dive_data::cylinder::display_gas_management;
@@ -13,7 +12,7 @@ pub fn execute_dive_plan(mut dive_model: DiveModel, cylinders: &mut Vec<Cylinder
     let cylinder_selection = select_cylinder(cylinders);
     dive_model.dive_profile = run_dive_profile(dive_model, dive_step, cylinders[cylinder_selection].gas_mixture);
     display_results(dive_model.dive_profile);
-    display_gas_management(update_gas_management(cylinders[cylinder_selection].gas_management, dive_step));
+    display_gas_management(cylinders[cylinder_selection].gas_management.update_gas_management(dive_step));
 
     (dive_model.dive_profile, dive_step)
 }

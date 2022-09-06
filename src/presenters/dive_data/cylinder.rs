@@ -1,5 +1,3 @@
-use crate::controllers::gas_management::calculate_initial_pressurised_cylinder_volume;
-use crate::controllers::gas_mixture::{calculate_helium_percentage_maximum_limit, calculate_nitrogen_percentage};
 use crate::models::cylinder::Cylinder;
 use crate::models::gas_management::GasManagement;
 use crate::models::gas_mixture::GasMixture;
@@ -10,7 +8,7 @@ pub fn create_cylinder() -> Cylinder {
     let cylinder_pressure = read_numeric_i32("Enter cylinder starting pressure (Bar):", 50, 300);
     let surface_air_consumption_rate = read_numeric_i32("Enter surface air consumption rate (L/min):", 5, 30);
 
-    let initial_pressurised_cylinder_volume = calculate_initial_pressurised_cylinder_volume(cylinder_volume, cylinder_pressure);
+    let initial_pressurised_cylinder_volume = GasManagement::calculate_initial_pressurised_cylinder_volume(cylinder_volume, cylinder_pressure);
     let gas_mixture = enter_gas_mixture();
     let gas_management = initialise_gas_management(initial_pressurised_cylinder_volume, surface_air_consumption_rate);
 
@@ -22,11 +20,12 @@ pub fn display_gas_management(gas_management: GasManagement) {
 }
 
 fn enter_gas_mixture() -> GasMixture {
-    let oxygen = read_numeric_i32("\nEnter oxygen (%):", 5, 100);
-    let helium = read_numeric_i32("Enter helium (%):", 0, calculate_helium_percentage_maximum_limit(oxygen));
-    let nitrogen = calculate_nitrogen_percentage(oxygen, helium);
+    let mut gas_mixture = GasMixture::default();
 
-    GasMixture { oxygen, helium, nitrogen }
+    gas_mixture.assign_oxygen(read_numeric_i32("\nEnter oxygen (%):", 5, 100));
+    gas_mixture.assign_helium(read_numeric_i32("Enter helium (%):", 0, 100));
+    
+    gas_mixture
 }
 
 fn initialise_gas_management(initial_pressurised_cylinder_volume: i32, surface_air_consumption_rate: i32) -> GasManagement {
