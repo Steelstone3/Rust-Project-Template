@@ -3,8 +3,8 @@ name = "example"
 version = "0.1.0"
 authors = ["Skippy <steelstone3@gmail.com>"]
 edition = "2021"
-homepage = "https://github.com/Steelstone3/Bubbles-Dive-Planner-Console"
-repository = "https://github.com/Steelstone3/Bubbles-Dive-Planner-Console"
+homepage = "https://github.com/Steelstone3/Rust-Project-Template"
+repository = "https://github.com/Steelstone3/Rust-Project-Template"
 license = "GPLv3"
 readme = "README.md"
 include = [
@@ -16,4 +16,4 @@ include = [
 [dev-dependencies]
 
 [dependencies]
-inquire = "0.5.2"
+inquire = "0.6"
